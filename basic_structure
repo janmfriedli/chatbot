@@ -1,0 +1,43 @@
+import re
+import random
+
+# negative and exit commands definition 
+class SupportBot:
+  negative_responses = ("nothing", "don't", "stop", "sorry")
+
+  exit_commands = ("quit", "pause", "exit", "goodbye", "bye", "later")
+
+  def __init__(self):
+    pass
+
+# welcome that call on convo handling
+  def welcome(self):
+    name = input("Intro sentence. What is your first name and last name? ")
+    
+    will_help = input(f"Ok {name}, what can I help you with? ")
+    
+    if will_help in self.negative_responses:
+      print("Ok, have a great day!")
+      return
+    
+    self.handle_conversation(will_help)
+
+# convo handling for continuity
+
+  def handle_conversation(self, reply):
+    while not self.make_exit(reply):
+      reply = input("How can I help you? ")
+  
+# exit when exit command hit 
+  def make_exit(self, reply):
+    for exit_command in self.exit_commands:
+      if exit_command in reply:
+        print("Ok, have a great day")
+        return True
+
+    return False
+    
+# create a SupportBot instance
+SupportConversation = SupportBot()
+# call the .welcome() method
+SupportConversation.welcome()
